@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+</head>
+<body>
+<h1>Product</h1>
+
+<table>
+  <colgroup>
+    <col span="1" style="background:Khaki"><!-- С помощью этой конструкции задаем цвет фона для первого столбца таблицы-->
+    <col span="2" style="background-color:LightCyan"><!-- Задаем цвет фона для следующих (3) столбцов таблицы-->
+  </colgroup>
+  <tr>
+    <th>ID </th>
+    <th>    title   </th>
+    <th> description</th>
+  </tr>
+  <tr th:each="p: ${product}" >
+    <td th:text="${p.id}"></td>
+    <td><a th:href="@{/product/{title}(title=${p.title})}" th:text="${p.title}"></a></td>
+    <td th:text="${p.description}"></td>
+  </tr>
+</table>
+
+<h2>Add product</h2>
+<form action="/productcreate" method="post">
+  title: <input type="text"  name="title"><br />
+  description: <input type="text" name="description"><br />
+  <button type="submit">Add product</button>
+</form>
+
+<h2>delete product</h2>
+<form action="/deleteproduct" method="get">
+  id: <input type="number"  name="id"><br />
+  <button type="submit">delete  product</button>
+</form>
+
+<h2>edit product</h2>
+<form action="/editproduct" method="post">
+  id: <input type="number"  name="id"><br />
+  title: <input type="text"  name="title"><br />
+  description: <input type="text" name="description"><br />
+  <button type="submit">edit product</button>
+</form>
+
+<img src="https://i.postimg.cc/26zrhhQN/0261dfae0e4904627653a2d6d5de1a4e.jpg">
+</body>
+</html>
