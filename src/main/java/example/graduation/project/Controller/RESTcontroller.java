@@ -1,6 +1,7 @@
 package example.graduation.project.Controller;
 
-import example.graduation.project.View.ServiceProduct;
+import example.graduation.project.Service.FileGateway;
+import example.graduation.project.Service.ServiceProduct;
 import example.graduation.project.Model.Product;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/product")
 public class RESTcontroller {
+    private final FileGateway fileGateway;
 
     private final ServiceProduct serviceProduct;
 
@@ -31,6 +33,7 @@ public class RESTcontroller {
      */
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        fileGateway.writeToFile(product.getTitle() + ".txt", product.toString());
         return new ResponseEntity<>(serviceProduct.create(product), HttpStatus.CREATED);
     }
 

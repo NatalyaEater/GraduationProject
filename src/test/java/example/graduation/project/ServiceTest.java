@@ -2,8 +2,8 @@ package example.graduation.project;
 
 
 import example.graduation.project.Model.Product;
-import example.graduation.project.View.Repositories;
-import example.graduation.project.View.ServiceProduct;
+import example.graduation.project.Service.Repositories;
+import example.graduation.project.Service.ServiceProduct;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 import static org.mockito.Mockito.when;
 

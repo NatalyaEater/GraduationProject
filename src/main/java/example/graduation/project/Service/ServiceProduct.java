@@ -1,4 +1,4 @@
-package example.graduation.project.View;
+package example.graduation.project.Service;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

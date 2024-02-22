@@ -1,4 +1,4 @@
-package example.graduation.project.View;
+package example.graduation.project.Service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
