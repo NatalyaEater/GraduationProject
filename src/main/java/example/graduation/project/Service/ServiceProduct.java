@@ -10,23 +10,37 @@ import java.util.List;
 @Service
 @Data
 @RequiredArgsConstructor
-
 public class ServiceProduct {
-    /**
-     * Интерфейс взаимодействия с Базой Данных
-     */
+    /*Интерфейс взаимодействия с Базой Данных*/
     private final Repositories repositories;
 
-    /**
-     * Получение всех товаров через БД
-     */
+    /*Получение всех товаров через БД*/
     public List<Product> getAll() {
         return repositories.findAll();
     }
 
-    /**
-     * Получение продукта по id в бд
-     */
+    /* Создание продукта в БД*/
+    public Product create(Product product) {
+        return repositories.save(product);
+    }
+    /* Удаление продукта по id*/
+    public void delete(long id) {
+        repositories.deleteById(id);
+    }
+
+    /*Обновление продукта*/
+    public void updateProduct(int id, String title, String description) {
+        Product product = repositories.getById(id);
+        if (product != null) {
+            product.setTitle(title);
+            product.setDescription(description);
+            repositories.save(product);
+        } else {
+            throw new RuntimeException("error");
+        }
+    }
+
+    /*Получение продукта по id в БД*/
     public Product getById(long id) {
         Product product;
         try {
@@ -37,16 +51,7 @@ public class ServiceProduct {
             return null;
         }
     }
-
-    /**
-     * Создание продукта в БД
-     */
-    public Product create(Product product) {
-        return repositories.save(product);
-    }
-
-    /*
-    * Редактировать продукт*/
+    /*Редактирование продукта*/
     public Product update(Product product) {
         Product upProduct = getById(product.getId());
         upProduct.setTitle(product.getTitle());
@@ -54,27 +59,4 @@ public class ServiceProduct {
         return repositories.save(upProduct);
     }
 
-
-
-
-    /*
-    * Обновить продукт*/
-    public void updateProduct(int id, String title, String description) {
-        Product product = repositories.getById(id);
-        if (product != null) {
-            product.setTitle(title);
-            product.setDescription(description);
-            repositories.save(product);
-        } else {
-            throw new RuntimeException("error");
-        }
-
-    }
-
-    /**
-     * Удаление продукта по id
-     */
-    public void delete(long id) {
-        repositories.deleteById(id);
-    }
 }

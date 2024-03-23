@@ -2,11 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Home Page</title>
+  <title>Home</title>
 </head>
 <body>
 <h1>Product</h1>
-
 <table>
   <colgroup>
     <col span="1" style="background:Khaki"><!-- С помощью этой конструкции задаем цвет фона для первого столбца таблицы-->
@@ -14,14 +13,16 @@
   </colgroup>
   <tr>
     <th>ID </th>
-    <th>    title   </th>
+    <th> title </th>
     <th> description</th>
   </tr>
   <tr th:each="p: ${product}" >
     <td th:text="${p.id}"></td>
-    <td><a th:href="@{/product/{title}(title=${p.title})}" th:text="${p.title}"></a></td>
+    <td><a th:href="@{/product/{id}(id=${p.id})}" th:text="${p.title}"></a></td>
     <td th:text="${p.description}"></td>
   </tr>
+  <form action="/main/{id}" method="get">
+  </form>
 </table>
 
 <h2>Add product</h2>
@@ -31,13 +32,13 @@
   <button type="submit">Add product</button>
 </form>
 
-<h2>delete product</h2>
+<h2>Delete product</h2>
 <form action="/deleteproduct" method="get">
   id: <input type="number"  name="id"><br />
   <button type="submit">delete  product</button>
 </form>
 
-<h2>edit product</h2>
+<h2>Edit product</h2>
 <form action="/editproduct" method="post">
   id: <input type="number"  name="id"><br />
   title: <input type="text"  name="title"><br />

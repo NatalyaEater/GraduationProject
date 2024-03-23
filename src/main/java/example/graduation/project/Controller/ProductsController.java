@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import example.graduation.project.Service.ServiceProduct;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-/*
-* Контроллер обрабатывает поступающие запросы */
+/*Контроллер обрабатывает поступающие запросы */
 /*
 * Аннотация @Controller  нужна для автоматической регистрации класса ProductController
 * Компонент класса будет создан и зарегистрирован автоматически при запуске приложения.*/
@@ -18,35 +18,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class ProductsController {
 
-    /**
-     * Инкапсулируем управление продуктами в бд
-     */
+    /*Инкапсулируем управление продуктами в БД*/
     private final ServiceProduct serviceProduct;
 
-    /**
-     * Получить главную страницу
-     */
+    /*Вывод главной страницы*/
     @GetMapping("/main")
     public String getMain(Model model) {
         model.addAttribute("product", serviceProduct.getAll());
         return "product";
     }
+    /*Вывод продукта по id*/
+    @GetMapping("/product/{id}")
+    public String getProduct(@PathVariable ("id") long id, Model model) {
+        model.addAttribute("product", serviceProduct.getById(id));
+        return "productid";
+    }
 
-
-
-    /**
-     * Удалить продукт
-     */
+    /*Удаление продукта*/
     @GetMapping("/deleteproduct")
-    public String turnToDelete( int id) {
-        serviceProduct.delete(id);
+    public String turnToDelete( long id) {
+        if (serviceProduct.getById(id)!=null) {
+            serviceProduct.delete(id);
+    } else {
+            return "error";
+    }
         return "deleteproduct";
     }
 
-
-    /**
-     * Редактирование продукта в базе данных
-     */
+    /*Редактирование продукта в базе данных*/
     @PostMapping("/editproduct")
     public String updateProduct(Product product, int id) {
         if (product != null) {
@@ -54,14 +53,10 @@ public class ProductsController {
         } else {
             return "error";
         }
-        return "product";
+        return "editproduct";
     }
 
-
-
-    /**
-     * Создание нового продукта
-     */
+    /*Создание нового продукта*/
     @PostMapping("/productcreate")
     public String createProduct(Product product) {
         serviceProduct.create(product);

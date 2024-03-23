@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class GraduationProjectApplicationTests {
-
 	@Autowired
 	private ServiceProduct serviceProduct;
 	@Autowired
@@ -33,12 +32,8 @@ class GraduationProjectApplicationTests {
 		product.setTitle("water");
 		product.setDescription("still water");
 		repositories.save(product);
-
-
 		List<Product> testProduct = serviceProduct.getAll();
 		assertTrue(testProduct.size() > 0);
 		assertEquals(product.getTitle(), testProduct.get(0).getTitle());
 	}
-
-
 }

@@ -7,13 +7,10 @@ import example.graduation.project.Model.Product;
 import java.util.List;
 
 
-/*
-* Аннотация @Repository нужна для автоматической регистрации класса Repositories */
+/* Аннотация @Repository нужна для автоматической регистрации класса Repositories */
 @Repository
 public interface Repositories extends JpaRepository<Product, Long> {
-    /**
-     * Поиск по названию продукта
-     */
+    /*Поиск по названию продукта*/
     List<Product> getByTitle(String title);
 
     Product getById(int id);

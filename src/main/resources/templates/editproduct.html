@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit product</title>
+</head>
+<body>
+<h1>Edit product</h1>
+
+<h2><p>Title: <span th:text="${product.title}"></span></p></h2>
+<p>ID: <span th:text="${product.id}"></span></p>
+<p>description:<span th:text="${product.description}"></span></p>
+
+<form action="/main" method="get">
+  <button type="submit">go home</button>
+</form>
+<img src="https://i.postimg.cc/FRDy0mbY/1200px-Antu-task-com.png">
+</body>
+</html>

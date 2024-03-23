@@ -2,23 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Home Page</title>
+  <title>Deletion product</title>
 </head>
 <body>
-<h1>Product</h1>
+<h1>The deletion was completed successfully</h1>
 
-<table>
-  <tr>
-    <th>ID </th>
-    <th>    title   </th>
-    <th> description</th>
-  </tr>
-  <tr th:each="p: ${product}" >
-    <td th:text="${p.id}"></td>
-    <td><a th:href="@{/product/{title}(title=${p.title})}" th:text="${p.description}"></a></td>
-    <td th:text="${p.description}"></td>
-  </tr>
-</table>
 <form action="/main" method="get">
   <button type="submit">go home</button>
 </form>
+</body>
+</html>

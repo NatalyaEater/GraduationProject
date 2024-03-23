@@ -17,47 +17,36 @@ import java.util.List;
 @RequestMapping("/product")
 public class RESTcontroller {
     private final FileGateway fileGateway;
-
     private final ServiceProduct serviceProduct;
 
-    /**
-     * Получение всех товаров
-     */
+    /*Получение всех продуктов*/
     @GetMapping
     public ResponseEntity<List<Product>> getAllProduct() {
         return new ResponseEntity<>(serviceProduct.getAll(), HttpStatus.OK);
     }
 
-    /**
-     * Создане нового товара
-     */
+    /*Создание нового продукта*/
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         fileGateway.writeToFile(product.getTitle() + ".txt", product.toString());
         return new ResponseEntity<>(serviceProduct.create(product), HttpStatus.CREATED);
     }
 
-    /**
-     * Обновление товара
-     */
+    /*Обновление продукта*/
     @PutMapping
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         return new ResponseEntity<>(serviceProduct.update(product), HttpStatus.OK);
     }
 
-    /**
-     * Удаление товара по id
-     */
+    /*Удаление продукта по id*/
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") long id) {
         serviceProduct.delete(id);
         return ResponseEntity.ok().build();
     }
 
-    /**
-     * Получить товар по id
-     */
-    @GetMapping("{id}")
+    /*Получение продукта по id*/
+    @GetMapping("/p/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") long id) {
         return new ResponseEntity<>(serviceProduct.getById(id), HttpStatus.OK);
     }
